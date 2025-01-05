@@ -137,7 +137,6 @@ require("lazy").setup({
       spec = {
         { "<leader>c", group = "[C]ode", mode = { "n", "x" } },
         { "<leader>d", group = "[D]ocument" },
-        -- { "<leader>r", group = "[R]ename" },
         { "<leader>s", group = "[S]earch" },
         { "<leader>w", group = "[W]orkspace" },
         { "<leader>t", group = "[T]oggle" },
@@ -428,6 +427,14 @@ require("lazy").setup({
         typescriptreact = { "prettier" },
         yaml = { "prettier" },
       },
+    },
+  },
+
+  -- smart tab like in helix
+  {
+    "boltlessengineer/smart-tab.nvim",
+    opts = {
+      mapping = "<tab>",
     },
   },
 
