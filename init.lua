@@ -523,6 +523,37 @@ require("lazy").setup({
     end,
   },
 
+  -- splash screen
+  {
+    "piperinnshall/boot.nvim",
+    opts = {
+      theme = {
+        content = {
+          {
+            ascii = {
+              "        .n.                     |      ",
+              "       /___\\          _.---.  \\ _ /    ",
+              "       [|||]         (_._ ) )--;_) =-  ",
+              "       [___]           '---'.__,' \\    ",
+              "       }-=-{                    |      ",
+              "       |-' |                           ",
+              "       |.-'|                p          ",
+              "~^=~^~-|_.-|~^-~^~ ~^~ -^~^~|\\ ~^-~^~- ",
+              "^   .=.| _.|__  ^       ~  /| \\        ",
+              " ~ /:. \\' _|_/\\    ~      /_|__\\  ^    ",
+              ".-/::.  |   |''|-._    ^   ~~~~        ",
+              "  `===-'-----'''`  '-.              ~  ",
+              "                 __.-'      ^          ",
+            },
+            color = "959cbd",
+            vertical_padding = 10,
+            alignment = "center",
+          },
+        },
+      },
+    },
+  },
+
   -- mini.nvim collection
   {
     "echasnovski/mini.nvim",
