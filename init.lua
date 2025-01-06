@@ -508,8 +508,8 @@ require("lazy").setup({
         styles = {
           floats = "normal",
         },
-        -- less colorful floats
         on_highlights = function(hl, c)
+          -- less colorful floats
           hl.TelescopeBorder = {
             bg = c.bg,
             fg = c.fg,
@@ -533,6 +533,28 @@ require("lazy").setup({
             fg = c.fg,
             bg = c.bg,
           }
+
+          -- better markdown
+          hl["@markup.list.markdown"] = { fg = c.comment }
+          hl["@markup.link"] = { fg = c.cyan }
+          hl["@markup.link.label"] = { fg = c.blue }
+          hl["@markup.link.url"] = { fg = c.fg, underline = true }
+          hl["@markup.raw"] = { fg = c.fg }
+          hl["@markup.raw.markdown_inline"] = { fg = c.blue }
+          hl["@punctuation.special.markdown"] = { fg = c.fg } -- tables
+          hl["@markup.heading.marker"] = { fg = c.comment }
+
+          local set_heading_highlight = function(index, color)
+            hl["@markup.heading." .. index] = { fg = color, bold = true }
+            hl["@markup.heading." .. index .. ".markdown"] = { fg = color, bold = true }
+          end
+
+          set_heading_highlight(1, c.red)
+          set_heading_highlight(2, c.orange)
+          set_heading_highlight(3, c.yellow)
+          set_heading_highlight(4, c.green)
+          set_heading_highlight(5, c.cyan)
+          set_heading_highlight(6, c.purple)
         end,
       })
     end,
