@@ -598,8 +598,51 @@ require("lazy").setup({
       require("mini.surround").setup()
 
       local statusline = require("mini.statusline")
+
       statusline.setup({
         use_icons = false,
+        content = {
+          active = function()
+            -- modified code from mini.statusline
+            local CTRL_S = vim.api.nvim_replace_termcodes("<C-S>", true, true, true)
+            local CTRL_V = vim.api.nvim_replace_termcodes("<C-V>", true, true, true)
+            local modes = setmetatable({
+              ["n"] = { name = "NOR", hl = "MiniStatuslineModeNormal" },
+              ["v"] = { name = "VIS", hl = "MiniStatuslineModeVisual" },
+              ["V"] = { name = "LIN", hl = "MiniStatuslineModeVisual" },
+              [CTRL_V] = { name = "BLK", hl = "MiniStatuslineModeVisual" },
+              ["s"] = { name = "SEL", hl = "MiniStatuslineModeVisual" },
+              ["S"] = { name = "S-L", hl = "MiniStatuslineModeVisual" },
+              [CTRL_S] = { name = "S-B", hl = "MiniStatuslineModeVisual" },
+              ["i"] = { name = "INS", hl = "MiniStatuslineModeInsert" },
+              ["R"] = { name = "REP", hl = "MiniStatuslineModeReplace" },
+              ["c"] = { name = "CMD", hl = "MiniStatuslineModeCommand" },
+              ["r"] = { name = "PRM", hl = "MiniStatuslineModeOther" },
+              ["!"] = { name = "SHL", hl = "MiniStatuslineModeOther" },
+              ["t"] = { name = "TER", hl = "MiniStatuslineModeOther" },
+            }, {
+              __index = function()
+                return { name = "UNK", hl = "%#MiniStatuslineModeOther#" }
+              end,
+            })
+
+            local mode_info = modes[vim.fn.mode()]
+            local filename = statusline.section_filename({ trunc_width = 140 })
+            local location = statusline.section_location({ trunc_width = 75 })
+            local search = statusline.section_searchcount({ trunc_width = 75 })
+
+            return statusline.combine_groups({
+              -- { hl = mode_info.hl, strings = { mode_info.name } },
+              { hl = "StatuslineDark", strings = { mode_info.name } }, -- no colors
+              { hl = "StatuslineDark", strings = { filename } },
+              "%=", -- end of left alignment
+              -- { hl = "StatuslineDark", strings = { diff } },
+              -- { hl = "StatuslineDark", strings = { vim.bo.filetype } },
+              { hl = "StatuslineDark", strings = { search } },
+              { hl = "StatuslineDark", strings = { location } },
+            })
+          end,
+        },
       })
 
       ---@diagnostic disable-next-line: duplicate-set-field
