@@ -508,7 +508,7 @@ require("lazy").setup({
         styles = {
           floats = "normal",
         },
-        -- less colorful telescope
+        -- less colorful floats
         on_highlights = function(hl, c)
           hl.TelescopeBorder = {
             bg = c.bg,
@@ -518,11 +518,20 @@ require("lazy").setup({
             bg = c.bg,
             fg = c.fg,
           }
+          hl.TelescopePromptTitle = {
+            fg = c.fg,
+          }
           hl.FloatBorder = {
             fg = c.fg,
+            bg = c.bg_float,
           }
           hl.FloatTitle = {
             fg = c.fg,
+            bg = c.bg_float,
+          }
+          hl.MiniFilesTitleFocused = {
+            fg = c.fg,
+            bg = c.bg,
           }
         end,
       })
