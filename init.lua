@@ -586,7 +586,6 @@ require("lazy").setup({
       end
 
       require("mini.pairs").setup()
-      -- TODO: add keymap
       require("mini.files").setup()
 
       vim.keymap.set("n", "<leader>wf", MiniFiles.open, { desc = "Open [W]orkspace [F]iles" })
