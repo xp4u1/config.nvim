@@ -51,17 +51,22 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-vim.keymap.set("n", "gh", function()
-  vim.cmd("normal! 0")
-end, { desc = "Go to the beginning of the line" })
+-- remap line motions (like in helix)
+vim.keymap.set("n", "gh", "0", { desc = "Go to the beginning of the line" })
+vim.keymap.set("n", "gl", "$", { desc = "Go to the end of the line" })
+vim.keymap.set("n", "gs", "^", { desc = "Go to first character of the line" })
 
-vim.keymap.set("n", "gl", function()
-  vim.cmd("normal! $")
-end, { desc = "Go to the end of the line" })
+-- paste over selection
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste over selection" })
 
-vim.keymap.set("n", "gs", function()
-  vim.cmd("normal! ^")
-end, { desc = "Go to first character of the line" })
+-- interaction with system clipboard
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+
+-- toggle line number styles
+vim.keymap.set("n", "<leader>tl", function()
+  vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = "[T]oggle [L]ine numbers" })
 
 -- [[Plugins]]
 
