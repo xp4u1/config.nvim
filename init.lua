@@ -672,4 +672,11 @@ require("lazy").setup({
       end)
     end,
   },
+
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<leader>g", ":tab G<CR>", { desc = "Fu[G]itive" })
+    end,
+  },
 })
