@@ -32,6 +32,8 @@ vim.opt.splitbelow = true
 -- min. number of lines above/below cursor
 vim.opt.scrolloff = 5
 
+vim.opt.statuscolumn = "%=%l %s"
+
 -- [[ Keymaps ]]
 
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
@@ -63,11 +65,6 @@ vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste over selection" })
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 
--- toggle line number styles
-vim.keymap.set("n", "<leader>tl", function()
-  vim.wo.relativenumber = not vim.wo.relativenumber
-end, { desc = "[T]oggle [L]ine numbers" })
-
 -- [[Plugins]]
 
 -- plugin manager (lazy)
@@ -91,13 +88,6 @@ require("lazy").setup({
   {
     "lewis6991/gitsigns.nvim",
     opts = {
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-      },
       on_attach = function(bufnr)
         local gitsigns = require("gitsigns")
 
@@ -533,6 +523,13 @@ require("lazy").setup({
             fg = c.fg,
             bg = c.bg,
           }
+
+          -- workaround for statuscolumn:
+          -- cursorline needs to be turned on to highlight the
+          -- current line number
+          vim.opt.cursorline = true
+          hl.CursorLineNr = { fg = c.fg }
+          hl.CursorLine = { bg = c.bg }
 
           -- better markdown
           hl["@markup.list.markdown"] = { fg = c.comment }
