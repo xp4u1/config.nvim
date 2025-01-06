@@ -185,6 +185,7 @@ require("lazy").setup({
       },
 
       spec = {
+        { "<leader>a", group = "H[a]rpoon" },
         { "<leader>c", group = "[C]ode", mode = { "n", "x" } },
         { "<leader>d", group = "[D]ocument" },
         { "<leader>s", group = "[S]earch" },
@@ -603,5 +604,37 @@ require("lazy").setup({
       },
       indent = { enable = true, disable = { "ruby" } },
     },
+  },
+
+  -- fast jumping
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    config = function()
+      local harpoon = require("harpoon")
+      ---@diagnostic disable-next-line: missing-parameter
+      harpoon.setup()
+
+      vim.keymap.set("n", "<leader>aa", function()
+        harpoon:list():add()
+      end, { desc = "Add to harpoon list" })
+      vim.keymap.set("n", "<leader>ae", function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end, { desc = "Show harpoon list" })
+
+      vim.keymap.set("n", "<M-j>", function()
+        harpoon:list():select(1)
+      end)
+      vim.keymap.set("n", "<M-k>", function()
+        harpoon:list():select(2)
+      end)
+      vim.keymap.set("n", "<M-l>", function()
+        harpoon:list():select(3)
+      end)
+      vim.keymap.set("n", "<M-;>", function()
+        harpoon:list():select(4)
+      end)
+    end,
   },
 })
