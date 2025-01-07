@@ -32,8 +32,6 @@ vim.opt.splitbelow = true
 -- min. number of lines above/below cursor
 vim.opt.scrolloff = 5
 
-vim.opt.statuscolumn = "%=%l %s"
-
 -- [[ Keymaps ]]
 
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
@@ -64,6 +62,11 @@ vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste over selection" })
 -- interaction with system clipboard
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+
+-- toggle line number styles
+vim.keymap.set("n", "<leader>tl", function()
+  vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = "[T]oggle [L]ine numbers" })
 
 -- [[Plugins]]
 
@@ -718,5 +721,15 @@ require("lazy").setup({
     config = function()
       vim.keymap.set("n", "<leader>g", ":tab G<CR>", { desc = "Fu[G]itive" })
     end,
+  },
+
+  {
+    "folke/snacks.nvim",
+    opts = {
+      statuscolumn = {
+        left = { "mark", "sign" },
+        right = { "git" },
+      },
+    },
   },
 })
