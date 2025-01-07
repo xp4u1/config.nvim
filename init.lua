@@ -528,6 +528,10 @@ require("lazy").setup({
           hl.CursorLineNr = { fg = c.fg }
           hl.CursorLine = { bg = c.bg }
 
+          -- statusline
+          hl.StatuslineActive = { fg = c.fg, bg = c.bg_dark }
+          hl.StatuslineInactive = { fg = "#363B54", bg = c.bg_dark }
+
           -- better markdown
           hl["@markup.list.markdown"] = { fg = c.comment }
           hl["@markup.link"] = { fg = c.cyan }
@@ -627,14 +631,17 @@ require("lazy").setup({
 
             return statusline.combine_groups({
               -- { hl = mode_info.hl, strings = { mode_info.name } },
-              { hl = "StatuslineDark", strings = { mode_info.name } }, -- no colors
-              { hl = "StatuslineDark", strings = { filename } },
+              { hl = "StatuslineActive", strings = { mode_info.name } }, -- no colors
+              { hl = "StatuslineActive", strings = { filename } },
               "%=", -- end of left alignment
-              -- { hl = "StatuslineDark", strings = { diff } },
-              -- { hl = "StatuslineDark", strings = { vim.bo.filetype } },
-              { hl = "StatuslineDark", strings = { search } },
-              { hl = "StatuslineDark", strings = { location } },
+              -- { hl = "StatuslineActive", strings = { diff } },
+              -- { hl = "StatuslineActive", strings = { vim.bo.filetype } },
+              { hl = "StatuslineActive", strings = { search } },
+              { hl = "StatuslineActive", strings = { location } },
             })
+          end,
+          inactive = function()
+            return " OFF  %#StatuslineInactive#%f%="
           end,
         },
       })
