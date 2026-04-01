@@ -298,7 +298,9 @@ require("lazy").setup({
 
       local servers = {
         clangd = {},
-        pyright = {},
+        pylsp = {},
+        black = {},
+        isort = {},
         stylua = {},
         ast_grep = {},
       }
